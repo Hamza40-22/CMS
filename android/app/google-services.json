@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "292577237197",
+    "project_id": "complaint-manage-sys",
+    "storage_bucket": "complaint-manage-sys.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292577237197:android:3589f8abfe60e8fab87184",
+        "android_client_info": {
+          "package_name": "com.caties.complaint_management_sys"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPb87MBK0sp-Rp_xjMDPCucT3HObYOzbE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292577237197:android:c7559319f1dee8b9b87184",
+        "android_client_info": {
+          "package_name": "com.example.complaint_management_sys"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPb87MBK0sp-Rp_xjMDPCucT3HObYOzbE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
