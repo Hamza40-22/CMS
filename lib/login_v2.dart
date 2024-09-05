@@ -856,7 +856,7 @@ class _LoginScreenState extends State<LoginScreen> {
             MaterialPageRoute(builder: (context) => SignupScrV3()),
           );
           break;
-        case 'mechanical_head ':
+        case 'mechanical':
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => MechanicalListScr()),
@@ -868,7 +868,7 @@ class _LoginScreenState extends State<LoginScreen> {
             MaterialPageRoute(builder: (context) => HvacListScreen()),
           );
           break;
-        case 'electrical_head':
+        case 'electrical':
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => ElectricalListScr()),

@@ -489,9 +489,9 @@ class _SignupScrV3State extends State<SignupScrV3> {
                           Column(
                             children: [
                               buildRoleSelectionTile('Admin', 'admin'),
-                              buildRoleSelectionTile('Mechanical', 'mechanical_head'),
+                              buildRoleSelectionTile('Mechanical', 'mechanical'),
                               buildRoleSelectionTile('HVAC', 'hvac'),
-                              buildRoleSelectionTile('Electrical', 'electrical_head'),
+                              buildRoleSelectionTile('Electrical', 'electrical'),
                               buildRoleSelectionTile('Utility', 'utility'),
                             ],
                           ),
