@@ -752,6 +752,7 @@
 import 'package:complaint_management_sys/Utils/utils.dart';
 import 'package:complaint_management_sys/widgets/round_btn.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -791,7 +792,19 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     _loadUserEmailPassword();
+
+    // Listen for FCM token refresh
+    FirebaseMessaging.instance.onTokenRefresh.listen((newToken) {
+      if (_auth.currentUser != null) {
+        // Update the FCM token in Firestore when the token refreshes
+        _firestore
+            .collection('users')
+            .doc(_auth.currentUser!.uid)
+            .update({'fcmToken': newToken});
+      }
+    });
   }
+
 
   @override
   void dispose() {
@@ -805,6 +818,8 @@ class _LoginScreenState extends State<LoginScreen> {
     final savedEmail = prefs.getString('email');
     final savedPassword = prefs.getString('password');
     final savedRememberMe = prefs.getBool('rememberMe') ?? false;
+    String? fcmToken = await FirebaseMessaging.instance.getToken();
+
 
     if (savedEmail != null && savedPassword != null && savedRememberMe) {
       emailController.text = savedEmail;
@@ -836,6 +851,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     try {
+      // Sign in the user with Firebase Authentication
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
@@ -843,12 +859,26 @@ class _LoginScreenState extends State<LoginScreen> {
 
       _saveUserEmailPassword();
 
+      // Retrieve the user's role from Firestore
       DocumentSnapshot document = await _firestore
           .collection('users')
           .doc(userCredential.user!.uid)
           .get();
       String role = document['role'];
 
+      // Get the FCM token for the user
+      String? fcmToken = await FirebaseMessaging.instance.getToken();
+      print('FCM Token: $fcmToken');
+
+      // Check if FCM token is not null and update it in Firestore
+      if (fcmToken != null) {
+        await _firestore
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .update({'fcmToken': fcmToken});
+      }
+
+      // Navigate to different screens based on the role
       switch (role) {
         case 'admin':
           Navigator.pushReplacement(
@@ -899,6 +929,7 @@ class _LoginScreenState extends State<LoginScreen> {
       loading = false;
     });
   }
+
 
   void _forgotPassword() async {
     if (emailController.text.isEmpty) {
