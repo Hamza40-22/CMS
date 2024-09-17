@@ -512,6 +512,8 @@ import 'signup_v2.dart';
 import 'SignUpScreen.dart';
 import 'user_scr_list_details/labor_scr_1_v2.dart';
 import 'labor_screen1.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 
 // Handle background messages
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {

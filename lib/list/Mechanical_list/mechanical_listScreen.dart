@@ -803,6 +803,7 @@
 
 // this code update status according to it  mechanicalStatus
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -868,6 +869,8 @@ class _MechanicalListScrState extends State<MechanicalListScr> {
     );
   }
 
+
+
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
 
   // Handle pull-to-refresh action
@@ -893,6 +896,19 @@ class _MechanicalListScrState extends State<MechanicalListScr> {
   @override
   Widget build(BuildContext context) {
     final appBarColor = Colors.blue; // AppBar color
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      if (message.notification != null) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(message.notification!.title ?? 'No Title'),
+            content: Text(message.notification!.body ?? 'No Body'),
+          ),
+        );
+      }
+    });
+
 
     return Scaffold(
       appBar: AppBar(
