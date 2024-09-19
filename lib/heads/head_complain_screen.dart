@@ -5,8 +5,7 @@
 // import 'package:image_picker/image_picker.dart';
 // import 'package:permission_handler/permission_handler.dart';
 //
-// import 'head_c_acceptance_screen.dart';
-// import 'head_c_rejection_screen.dart';
+
 //
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
